@@ -1,4 +1,9 @@
 {
+    "name": "drozzi-pro/wp-theme",
+    "description": "Theme Wordpress for development. Includes: Webpack",
+    "type": "project",
+    "minimum-stability": "stable",
+    "license": "proprietary",
     "require": {
         "kviron/wp-component-engine": "^0.1.0"
     },
