@@ -1,0 +1,13 @@
+{
+    "require": {
+        "kviron/wp-component-engine": "^0.1.0"
+    },
+    "autoload": {
+        "psr-4": { "": ["lib/"] },
+        "files": [
+            "inc/_require.php",
+            "post-types/_require.php",
+            "settings/_require.php"
+        ]
+    }
+}

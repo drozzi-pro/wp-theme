@@ -1,0 +1,5 @@
+@import "tailwind/_init";
+
+body.admin-bar {
+    max-height: calc(100vh - 32px);
+}
