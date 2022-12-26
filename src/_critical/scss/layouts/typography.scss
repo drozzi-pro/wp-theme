@@ -1,7 +1,7 @@
 /*
  * Настройки для основного текста
  */
-$font-family-text-base      : 'Montserrat', sans-serif; // Семейство шрифтов
+$font-family-text-base      : 'Noto Sans', sans-serif; // Семейство шрифтов
 $font-weight-text-base      : 400; // Толщина текста
 $font-size-text-base        : 18px; // Базовый размер текста
 $font-size-text-small       : 0.75rem; // Размер маленького текста
@@ -13,7 +13,7 @@ $color-text-base            : var(--color-text-base); // Основной цве
 /*
  * Настройки для заголовков
  */
-$font-family-header-base    : 'Montserrat', sans-serif;
+$font-family-header-base    : 'Ubuntu', sans-serif;
 $font-weight-header-base    : 400;
 $line-height-header-base    : 120%;
 $letter-spacing-header-base : -0.04em;

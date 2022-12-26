@@ -8,74 +8,32 @@
   transition      : transform .1s ease-in;
   outline         : none;
   border          : 1px solid transparent;
+  box-shadow      : unset;
 
   &:active {
     transform : translateY(1px);
   }
 
-  &:active,
-  &:focus {
-    outline : 2px solid black;
-  }
-
   &_type {
-    $box-shadow-size : 15px;
-
-    &_primary,
-    &_secondary {
-      font-weight    : 700;
-      text-transform : uppercase;
-      transition     : box-shadow .1s;
-    }
 
     &_primary {
       background-color : var(--color-white);
       color            : var(--color-blue);
-
-      &:hover {
-        box-shadow : 0 0 $box-shadow-size 0 var(--color-white);
-      }
-    }
-
-    &_secondary {
-      background-color : var(--color-accent);
-      color            : var(--color-white);
-
-      &:hover {
-        box-shadow : 0 0 $box-shadow-size 0 var(--color-accent);
-      }
-    }
-
-    &_outline {
-      font-weight      : 400;
-      background-color : transparent;
-      color            : var(--color-white);
-      border-color     : var(--color-white);
-
-      &:hover {
-        box-shadow : 0 0 $box-shadow-size 0 var(--color-white);
-      }
     }
   }
 
   &_shape {
+
     &_round {
       border-radius : var(--radius-button);
     }
+
   }
 
   &_size {
-    &_md {
-      font-size : 20px;
-      padding   : 1.45em 2.64em;
-    }
-    &_md_fixed {
-      min-width: 246px;
-    }
 
-    &_md-2 {
+    &_large {
       font-size : 20px;
-      padding   : 1.3em 2.28em;
     }
   }
 }

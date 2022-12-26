@@ -10,5 +10,10 @@
   },
   "autoload": {
     "psr-4": { "": ["libs/"] }
+  },
+  "scripts": {
+    "post-root-package-install": [
+      "php -r \"copy('.env.example', '.env');\""
+    ]
   }
 }

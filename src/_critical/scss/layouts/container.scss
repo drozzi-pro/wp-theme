@@ -5,12 +5,4 @@
 
 .container-fluid {
     @include make-container();
-
-    padding-left: 30px;
-    padding-right: 30px;
-
-    @include media-breakpoint-up(lg) {
-        padding-left: 32px;
-        padding-right: 32px;
-    }
 }
