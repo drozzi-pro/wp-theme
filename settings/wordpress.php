@@ -23,19 +23,18 @@ function svg_upload_allow($mimes)
  */
 function fix_svg_mime_type($data, $file, $filename, $mimes, $real_mime = '')
 {
-    if (version_compare($GLOBALS['wp_version'], '5.1.0', '>='))
+    if (version_compare($GLOBALS['wp_version'], '5.1.0', '>=')) {
         $dosvg = in_array($real_mime, [
             'image/svg',
             'image/svg+xml'
         ]);
-    else
+    } else {
         $dosvg = ( '.svg' === strtolower(substr($filename, -4)) );
+    }
 
     if ($dosvg) {
-
         // разрешим
         if (current_user_can('manage_options')) {
-
             $data['ext']  = 'svg';
             $data['type'] = 'image/svg+xml';
         } // запретим
@@ -90,7 +89,7 @@ if (is_admin()) {
 
     // оставим принудительную проверку при заходе на страницу обновлений...
     //remove_action( 'load-update-core.php', 'wp_update_plugins' );
-    remove_action( 'load-update-core.php', 'wp_update_themes' );
+    remove_action('load-update-core.php', 'wp_update_themes');
 
     // внутренняя страница админки "Update/Install Plugin" или "Update/Install Theme" - оставим не мешает...
     //remove_action( 'load-update.php', 'wp_update_plugins' );
@@ -112,7 +111,9 @@ if (is_admin()) {
 /**
  * Установим максимальное количество ревизий записи
  */
-if (!defined('WP_POST_REVISIONS')) define('WP_POST_REVISIONS', 5);
+if (!defined('WP_POST_REVISIONS')) {
+    define('WP_POST_REVISIONS', 5);
+}
 
 
 /**
@@ -143,7 +144,9 @@ function disable_emojis_tinymce($plugins)
 
 
 /**
+ * -----------------------------------------------------------------
  * Удаляем уведомление об обновлении WordPress для всех кроме админа
+ * -----------------------------------------------------------------
  */
 add_action('admin_head', function () {
     if (!current_user_can('manage_options')) {
@@ -156,7 +159,7 @@ add_action('admin_head', function () {
 /**
  * Добавляет миниатюры записи в таблицу записей в админке
  */
-if (1) {
+if (0) {
     add_action('init', 'add_post_thumbs_in_post_list_table', 20);
     function add_post_thumbs_in_post_list_table()
     {
@@ -166,12 +169,11 @@ if (1) {
         // $ptype_names = array('post','page'); // указывает типы для которых нужна колонка отдельно
 
         // Определяем типы записей автоматически
-        if (!isset($ptype_names)) {
+        if (empty($ptype_names)) {
             if ($supports === true) {
                 $ptype_names = get_post_types([ 'public' => true ], 'names');
                 $ptype_names = array_diff($ptype_names, [ 'attachment' ]);
-            } // для отдельных типов записей
-            elseif (is_array($supports)) {
+            } elseif (is_array($supports)) {
                 $ptype_names = $supports[0];
             }
         }
@@ -214,15 +216,15 @@ if (1) {
                     $height
                 ], true);
             } // из галереи...
-            elseif (
-            $attachments = get_children(
+            elseif ($attachments = get_children(
                 [
-                    'post_parent'    => $post_id,
-                    'post_mime_type' => 'image',
-                    'post_type'      => 'attachment',
-                    'numberposts'    => 1,
-                    'order'          => 'DESC',
-                ])
+                        'post_parent'    => $post_id,
+                        'post_mime_type' => 'image',
+                        'post_type'      => 'attachment',
+                        'numberposts'    => 1,
+                        'order'          => 'DESC',
+                    ]
+            )
             ) {
                 $attach = array_shift($attachments);
                 $thumb  = wp_get_attachment_image($attach->ID, [
@@ -253,46 +255,12 @@ function change_empty_alt_to_title($response)
     return $response;
 }
 
-add_filter('wp_prepare_attachment_for_js', 'change_empty_alt_to_title');
-
-
-/**
- * Возможность загружать изображения для терминов (элементов таксономий: категории, метки).
- *
- * Пример получения ID и URL картинки термина:
- *     $image_id = get_term_meta( $term_id, '_thumbnail_id', 1 );
- *     $image_url = wp_get_attachment_image_url( $image_id, 'thumbnail' );
- *
- * @author  : Kama http://wp-kama.ru
- *
- * @version 3.0
- */
-//
-if (is_admin() && !class_exists('Term_Meta_Image')) {
-
-    // init
-    //add_action('current_screen', 'Term_Meta_Image_init');
-//    add_action('admin_init', 'Term_Meta_Image_init');
-    function Term_Meta_Image_init()
-    {
-        $GLOBALS['Term_Meta_Image'] = new Term_Meta_Image();
-    }
-
-    // получаем ID термина на странице термина
-    //    $term_id = get_queried_object_id();
-
-    // получим ID картинки из метаполя термина
-    //    $image_id = get_term_meta( $term_id, '_thumbnail_id', 1 );
-
-    // ссылка на полный размер картинки по ID вложения
-    //    $image_url = wp_get_attachment_image_url( $image_id, 'full' );
-
-    // выводим картинку на экран
-    //    echo '<img src="'. $image_url .'" alt="" />';
-}
+//add_filter('wp_prepare_attachment_for_js', 'change_empty_alt_to_title');
 
 /**
+ * -----------------------------------------------------------------
  * Отключение полноэкранного режима в gutenberg
+ * -----------------------------------------------------------------
  */
 if (is_admin()) {
     function jba_disable_editor_fullscreen_by_default()
@@ -301,4 +269,20 @@ if (is_admin()) {
         wp_add_inline_script('wp-blocks', $script);
     }
     add_action('enqueue_block_editor_assets', 'jba_disable_editor_fullscreen_by_default');
+}
+
+add_action("admin_menu", "remove_menus");
+function remove_menus()
+{
+    remove_menu_page("index.php");                # Консоль
+    remove_menu_page("edit.php");                 # Записи
+//    remove_menu_page("edit-comments.php");        # Комментарии
+//    remove_menu_page("edit.php?post_type=page");  # Страницы
+//    remove_menu_page("upload.php");               # Медиафайлы
+//    remove_menu_page("themes.php");               # Внешний вид
+//    remove_menu_page("plugins.php");              # Плагины
+//    remove_menu_page("users.php");                # Пользователи
+//    remove_menu_page("tools.php");                # Инструменты
+//    remove_menu_page("options-general.php");      # Параметры
+//    remove_menu_page("edit.php?post_type=acf-field-group"); # ACF
 }

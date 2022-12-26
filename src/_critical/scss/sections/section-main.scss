@@ -1,0 +1,82 @@
+.section-main {
+
+  &__wrapper {
+    position   : relative;
+    min-height : 100vh;
+
+    @include media-breakpoint-up(lg) {
+
+    }
+  }
+
+  &__slider {
+    height : 100%;
+  }
+
+  &__slide {
+    aspect-ratio        : 1920 / 1277;
+    background-size     : cover;
+    background-position : center bottom;
+    position            : relative;
+    display             : flex;
+    align-items         : center;
+    justify-content     : flex-start;
+
+    &-body {
+      position  : relative;
+      z-index   : 10;
+      max-width : 450px;
+    }
+
+    &-sup-title {
+      text-transform : uppercase;
+      @include ad-font(28, 24);
+    }
+
+    &-title {
+
+    }
+
+    &-text {
+      @include ad-font(18, 16);
+    }
+
+    &-layout {
+      position        : absolute;
+      object-fit      : cover;
+      object-position : center bottom;
+      bottom          : 0;
+
+      &:nth-child(3) {
+
+      }
+    }
+  }
+
+  &__pagination {
+    position    : absolute;
+    left        : 50% !important;
+    bottom      : 22% !important;
+    z-index     : 2;
+    text-align  : left !important;
+    transform   : translateX(-50%) !important;
+    display     : flex;
+    align-items : center;
+    gap         : 25px;
+
+    .swiper-pagination-bullet {
+      background-color : #fff;
+      opacity          : 1;
+      width            : 20px;
+      height           : 20px;
+      transition       : all .3s ease;
+      margin           : 0;
+
+      &.swiper-pagination-bullet-active {
+        background-color : #4CD8F9;
+        width            : 30px;
+        height           : 30px;
+      }
+    }
+  }
+}

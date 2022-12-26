@@ -1,0 +1,109 @@
+/*
+ * Настройки для основного текста
+ */
+$font-family-text-base      : 'Montserrat', sans-serif; // Семейство шрифтов
+$font-weight-text-base      : 400; // Толщина текста
+$font-size-text-base        : 18px; // Базовый размер текста
+$font-size-text-small       : 0.75rem; // Размер маленького текста
+$line-height-text-base      : 1.5; // Высота строки текста
+$letter-spacing-text-base   : -0.01em; // Межсимвольный интервал
+$text-transform-text-base   : unset;
+$color-text-base            : var(--color-text-base); // Основной цвет текста
+
+/*
+ * Настройки для заголовков
+ */
+$font-family-header-base    : 'Montserrat', sans-serif;
+$font-weight-header-base    : 400;
+$line-height-header-base    : 120%;
+$letter-spacing-header-base : -0.04em;
+$text-transform-header-base : unset;
+
+/*
+ * Настройки для параграфов
+ */
+$paragraph-margin-top       : 0;
+$paragraph-margin-bottom    : 1rem;
+
+:root, body, html {
+  font-family    : $font-family-text-base;
+  font-size      : $font-size-text-base;
+  font-weight    : $font-weight-text-base;
+  line-height    : $line-height-text-base;
+  letter-spacing : $letter-spacing-text-base;
+  text-transform : $text-transform-text-base;
+  color          : $color-text-base;
+}
+
+h1, h2, h3, h4, h5, h6, .title {
+  margin         : 0 0 2rem 0;
+  font-family    : $font-family-header-base;
+  font-weight    : $font-weight-header-base;
+  line-height    : $line-height-header-base;
+  letter-spacing : $letter-spacing-header-base;
+  text-transform : $text-transform-header-base;
+  color          : currentColor;
+}
+
+// Максимальный и минимальный размер адаптивного размера шрифта
+h1, .title-h1 {
+  @include ad-font(78, 46); //Max, Min font-size h1
+  font-weight : bold!important;
+
+  sup {
+    position : relative;
+    top      : -1.5em;
+    @include ad-font(32, 16);
+  }
+}
+
+h2, .title-h2 {
+  @include ad-font(64, 24) //Max, Min font-size h2
+}
+
+h3, .title-h3 {
+  @include ad-font(48, 18) //Max, Min font-size h3
+}
+
+h4, .title-h4 {
+  @include ad-font(32, 16) //Max, Min font-size h4
+}
+
+h5, .title-h5 {
+  @include ad-font(24, 14) //Max, Min font-size h5
+}
+
+.display-small {
+  @include ad-font(64, 37);
+}
+
+.display-max {
+  @include ad-font(144, 72);
+  letter-spacing : 0.02em;
+}
+
+
+small, .text_small {
+  font-size : $font-size-text-small;
+}
+
+blockquote {
+  font-style  : italic;
+  margin      : 0 0 1rem;
+  padding     : 1em;
+  font-weight : 300;
+}
+
+.remark {
+  opacity : .7;
+  @include ad-font(14, 12);
+}
+
+p {
+  margin-top    : $paragraph-margin-top;
+  margin-bottom : $paragraph-margin-bottom;
+}
+
+pre {
+  font-size : .8rem;
+}

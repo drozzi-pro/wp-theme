@@ -1,14 +1,13 @@
 <?php
+
+use function Env\env;
+
 /*
 |--------------------------------------------------------------------------
 | Объявление переменных темы
 |--------------------------------------------------------------------------
 */
-define('THEME_VERSION', '0.0.1');
-define('THEME_PATH', get_template_directory());
-define('THEME_URL', get_template_directory_uri());
-define('THEME_ASSETS', THEME_URL . '/assets');
-
+define('THEME_ASSETS', get_template_directory_uri() . '/dist');
 /*
 |--------------------------------------------------------------------------
 | Регистрация авто загрузчика composer
@@ -20,8 +19,26 @@ define('THEME_ASSETS', THEME_URL . '/assets');
 |
 */
 if (!file_exists($composer = __DIR__ . '/vendor/autoload.php')) {
-    wp_die(__('Ошибка загрузки. Пожалуйста выполните <code>composer install</code> в папке активной темы', 'drozzi'));
+    wp_die(__('Ошибка загрузки. Пожалуйста выполните <code>composer install</code> в папке активной темы', 'raskroy'));
 }
 require $composer;
 
-CE::init(['debug' => WP_DEBUG]);
+/*
+|--------------------------------------------------------------------------
+| Настройка шаблонизатора
+|--------------------------------------------------------------------------
+*/
+CE::init(
+    [
+        'debug' => WP_DEBUG,
+        'template_parts' => 'template/',
+        'aliases' => [
+            'layout' => 'template/layouts',
+            'component' => 'template/components',
+        ]
+    ]
+);
+
+require_once 'settings/_index.php';
+require_once 'post-types/_index.php';
+require_once 'includes/assets.php';

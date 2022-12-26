@@ -1,0 +1,21 @@
+@use 'sass:math';
+@use "sass:map";
+
+@mixin ad-font($max, $min) {
+  $minScreen: 576;
+  $maxScreen: 1440;
+  $addSize: $max - $min;
+  $finallyScreen: $maxScreen - $minScreen;
+
+  @include media-breakpoint-up(sm){
+    font-size: calc(#{$min}px + #{$addSize} * ((100vw - (#{$minScreen}px)) / (#{$finallyScreen})));
+  }
+
+  @include media-breakpoint-up(xxl){
+    font-size: #{$max}px;
+  }
+
+  @include media-breakpoint-down(sm){
+    font-size: #{$min}px;
+  }
+}

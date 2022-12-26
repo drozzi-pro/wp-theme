@@ -1,4 +1,3 @@
-/node_modules
-/localhost.pem
-/localhost-key.pem
-/vendor
+/dist/
+/node_modules/
+/vendor/

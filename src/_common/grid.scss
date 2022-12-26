@@ -1,0 +1,32 @@
+$enable-grid-classes  : true !default;
+$container-paddings   : (
+        xs: 16px,
+        sm: 16px,
+        md: 16px,
+        lg: 16px,
+        xl: 16px,
+        xxl: 16px
+);
+
+// Grid breakpoints
+$grid-breakpoints     : (
+        xs: 0,
+        sm: 576px,
+        md: 768px,
+        lg: 992px,
+        xl: 1200px,
+        xxl: 1440px
+) !default;
+
+// Container max widths
+$container-max-widths : (
+        xs: 100%,
+        sm: 540px,
+        md: 720px,
+        lg: 960px,
+        xl: 1170px,
+        xxl: 1440px
+) !default;
+
+@include assert-ascending($grid-breakpoints, "$grid-breakpoints");
+@include assert-starts-at-zero($grid-breakpoints, "$grid-breakpoints");

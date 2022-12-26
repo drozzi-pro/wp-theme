@@ -1,0 +1,9 @@
+//@tailwind base;
+//@tailwind components;
+@tailwind utilities;
+@import "../../_common/_index.scss";
+@import "vars";
+@import "layouts/index";
+@import "blocks/_index";
+@import "sections/_index";
+@import "components/index";
